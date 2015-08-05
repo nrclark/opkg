@@ -20,6 +20,7 @@
 #include "config.h"
 
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -244,6 +245,7 @@ int opkg_conf_set_option(const char *name, const char *value, int overwrite)
             } else {
                 /* Let's not leak memory. */
                 free(*((char **const)o->value));
+                *((char **const)o->value) = NULL;
             }
         }
 
@@ -518,6 +520,7 @@ static int glob_errfunc(const char *epath, int eerrno)
 
 int opkg_conf_init(void)
 {
+    memset(opkg_config, 0, sizeof(opkg_conf_t));
     pkg_src_list_init(&opkg_config->pkg_src_list);
     pkg_src_list_init(&opkg_config->dist_src_list);
     pkg_dest_list_init(&opkg_config->pkg_dest_list);
@@ -766,6 +769,7 @@ int opkg_conf_load(void)
 
  err4:
     free(opkg_config->lists_dir);
+    opkg_config->lists_dir = NULL;
 
     pkg_hash_deinit();
     hash_table_deinit(&opkg_config->file_hash);
@@ -795,8 +799,12 @@ int opkg_conf_load(void)
     }
  err0:
     nv_pair_list_deinit(&opkg_config->tmp_dest_list);
+
     free(opkg_config->dest_str);
+    opkg_config->dest_str = NULL;
+
     free(opkg_config->conf_file);
+    opkg_config->conf_file = NULL;
 
     return -1;
 }
@@ -813,7 +821,10 @@ void opkg_conf_deinit(void)
         rm_r(opkg_config->cache_dir);
 
     free(opkg_config->dest_str);
+    opkg_config->dest_str = NULL;
+
     free(opkg_config->conf_file);
+    opkg_config->conf_file = NULL;
 
     pkg_src_list_deinit(&opkg_config->pkg_src_list);
     pkg_src_list_deinit(&opkg_config->dist_src_list);
