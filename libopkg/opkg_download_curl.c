@@ -66,7 +66,7 @@ size_t header_write(char *ptr, size_t size, size_t nmemb, void *userdata)
     char prefix[5];
     unsigned long i;
     for (i = 0; (i < 5) && (i < size * nmemb); ++i)
-        prefix[i] = tolower(ptr[i]);
+        prefix[i] = tolower((int)ptr[i]);
     if (str_starts_with(prefix, "etag:")) {
         char **out = userdata;
         char *start = strchr(ptr, '"') + 1;

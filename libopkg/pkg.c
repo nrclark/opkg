@@ -873,11 +873,11 @@ static int order(char x)
 {
     if (x == '~')
         return -1;
-    if (isdigit(x))
+    if (isdigit((int)x))
         return 0;
     if (!x)
         return 0;
-    if (isalpha(x))
+    if (isalpha((int)x))
         return x;
 
     return 256 + (int)x;
@@ -893,7 +893,7 @@ static int verrevcmp(const char *val, const char *ref)
     while (*val || *ref) {
         int first_diff = 0;
 
-        while ((*val && !isdigit(*val)) || (*ref && !isdigit(*ref))) {
+        while ((*val && !isdigit((int)*val)) || (*ref && !isdigit((int)*ref))) {
             int vc = order(*val), rc = order(*ref);
             if (vc != rc)
                 return vc - rc;
@@ -905,15 +905,15 @@ static int verrevcmp(const char *val, const char *ref)
             val++;
         while (*ref == '0')
             ref++;
-        while (isdigit(*val) && isdigit(*ref)) {
+        while (isdigit((int)*val) && isdigit((int)*ref)) {
             if (!first_diff)
                 first_diff = *val - *ref;
             val++;
             ref++;
         }
-        if (isdigit(*val))
+        if (isdigit((int)*val))
             return 1;
-        if (isdigit(*ref))
+        if (isdigit((int)*ref))
             return -1;
         if (first_diff)
             return first_diff;

@@ -53,13 +53,13 @@ char *trim_xstrdup(const char *src)
     const char *end;
 
     /* remove it from the front */
-    while (src && isspace(*src) && *src)
+    while (src && isspace((int)*src) && *src)
         src++;
 
     end = src + (strlen(src) - 1);
 
     /* and now from the back */
-    while ((end > src) && isspace(*end))
+    while ((end > src) && isspace((int)*end))
         end--;
 
     end++;
@@ -73,7 +73,7 @@ int line_is_blank(const char *line)
     const char *s;
 
     for (s = line; *s; s++) {
-        if (!isspace(*s))
+        if (!isspace((int)*s))
             return 0;
     }
     return 1;

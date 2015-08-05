@@ -66,7 +66,7 @@ char **parse_list(const char *raw, unsigned int *count, const char sep,
     while (*raw) {
         depends = xrealloc(depends, sizeof(char *) * (line_count + 1));
 
-        while (isspace(*raw))
+        while (isspace((int)*raw))
             raw++;
 
         start = raw;
@@ -74,7 +74,7 @@ char **parse_list(const char *raw, unsigned int *count, const char sep,
             raw++;
         end = raw;
 
-        while (end > start && isspace(*end))
+        while (end > start && isspace((int)*end))
             end--;
 
         if (sep == ' ')

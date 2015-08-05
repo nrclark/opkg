@@ -1074,7 +1074,7 @@ static int parseDepends(compound_depend_t * compound_depend,
         possibilities[i] = depend_init();
         /* gobble up just the name first */
         dest = buffer;
-        while (*src && !isspace(*src) && (*src != '(') && (*src != '*')
+        while (*src && !isspace((int)*src) && (*src != '(') && (*src != '*')
                && (*src != '|'))
             *dest++ = *src++;
         *dest = '\0';
@@ -1083,8 +1083,8 @@ static int parseDepends(compound_depend_t * compound_depend,
         /* now look at possible version info */
 
         /* skip to next chars */
-        if (isspace(*src))
-            while (*src && isspace(*src))
+        if (isspace((int)*src))
+            while (*src && isspace((int)*src))
                 src++;
 
         /* extract constraint and version */
@@ -1093,7 +1093,7 @@ static int parseDepends(compound_depend_t * compound_depend,
             possibilities[i]->constraint = str_to_constraint(&src);
 
             /* now we have any constraint, pass space to version string */
-            while (isspace(*src))
+            while (isspace((int)*src))
                 src++;
 
             /* this would be the version string */
@@ -1110,7 +1110,7 @@ static int parseDepends(compound_depend_t * compound_depend,
         free(pkg_name);
 
         /* now get past the ) and any possible | chars */
-        while (*src && (isspace(*src) || (*src == ')') || (*src == '|')))
+        while (*src && (isspace((int)*src) || (*src == ')') || (*src == '|')))
             src++;
         if (*src == '*') {
             compound_depend->type = GREEDY_DEPEND;

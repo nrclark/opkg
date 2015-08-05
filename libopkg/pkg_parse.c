@@ -71,7 +71,7 @@ int parse_version(pkg_t * pkg, const char *vstr)
     if (strncmp(vstr, "Version:", 8) == 0)
         vstr += 8;
 
-    while (*vstr && isspace(*vstr))
+    while (*vstr && isspace((int)*vstr))
         vstr++;
 
     /* A colon is only the epoch separator if it is the first non-numeric
