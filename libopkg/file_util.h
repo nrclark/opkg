@@ -23,6 +23,8 @@
 extern "C" {
 #endif
 
+#include <stdio.h>
+
 int file_exists(const char *file_name);
 int file_is_dir(const char *file_name);
 int file_is_symlink(const char *file_name);
