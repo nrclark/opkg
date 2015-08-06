@@ -383,7 +383,7 @@ static int is_pkg_a_replaces(pkg_t * pkg_scout, pkg_t * pkg)
 
 static int is_pkg_a_provides(const pkg_t * pkg_scout, const pkg_t * pkg)
 {
-    int i;
+    unsigned int i;
 
     for (i = 0; i < pkg->provides_count; i++) {
         if (strcmp(pkg_scout->name, pkg->provides[i]->name) == 0) {     // Found
@@ -466,7 +466,7 @@ static void __pkg_hash_fetch_conflicts(pkg_t * pkg,
 static void __pkg_hash_fetch_conflictees(pkg_t * pkg,
                                          pkg_vec_t * installed_conflicts)
 {
-    int i;
+    unsigned int i;
 
     pkg_vec_t *available_pkgs = pkg_vec_alloc();
     pkg_hash_fetch_all_installed(available_pkgs);
