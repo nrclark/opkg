@@ -19,9 +19,9 @@
 #include "config.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <glob.h>
 #include <unistd.h>
-#include <malloc.h>
 
 #include "opkg_message.h"
 #include "opkg_remove.h"
