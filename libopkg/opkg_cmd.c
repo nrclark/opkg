@@ -46,6 +46,8 @@
 #include "xsystem.h"
 #include "xfuncs.h"
 
+#define UNUSED(x) ((void)(x))
+
 static void print_pkg(pkg_t * pkg)
 {
     char *version = pkg_version_str_alloc(pkg);
@@ -81,6 +83,9 @@ static void sigint_handler(int sig)
 
 static int opkg_update_cmd(int argc, char **argv)
 {
+    UNUSED(argc);
+    UNUSED(argv);
+
     char *tmp, *dtemp;
     int err;
     int failures;
@@ -638,6 +643,9 @@ static int opkg_list_changed_conffiles_cmd(int argc, char **argv)
 
 static int opkg_list_upgradable_cmd(int argc, char **argv)
 {
+    UNUSED(argc);
+    UNUSED(argv);
+
     struct active_list *head = prepare_upgrade_list();
     struct active_list *node = NULL;
     pkg_t *_old_pkg, *_new_pkg;
@@ -738,6 +746,9 @@ static int opkg_configure_cmd(int argc, char **argv)
 
 static int opkg_clean_cmd(int argc, char **argv)
 {
+    UNUSED(argc);
+    UNUSED(argv);
+
     int err;
     err = rm_r(opkg_config->cache_dir);
     return err;
@@ -1184,6 +1195,9 @@ static int opkg_compare_versions_cmd(int argc, char **argv)
 
 static int opkg_print_architecture_cmd(int argc, char **argv)
 {
+    UNUSED(argc);
+    UNUSED(argv);
+
     nv_pair_list_elt_t *l;
 
     list_for_each_entry(l, &opkg_config->arch_list.head, node) {
